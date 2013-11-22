@@ -12,7 +12,7 @@ pathBanner=~/sg-gcard-kr/html.kr/i/gcard/gacha/hall_banner
 pathCard=~/Movies/jpg/
 tmpFile=${pathCard}tmp
 
-#scp file
+#scp file check host
 function check_host()
 {
 	case $1 in
