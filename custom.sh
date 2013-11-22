@@ -44,10 +44,6 @@ function item_copy()
 	echo "copy item ok!"
 }
 
-function banner_copy()
-{
-}
-
 case ${command} in
 	item_to_item)
 		item_copy ${pathItem} $2 ${pathItem} $3;
