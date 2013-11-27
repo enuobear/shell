@@ -86,6 +86,16 @@ case ${command} in
 	csv_merge)
 		./gccenv i18n csv-merge $2 $3 > $4
 		;;
+	card_psd)
+		for i in "${arr[@]:1}"			
+		do
+			cp ~/Pictures/project/svn_white/03Localization/KR/Card/PSD/$i\.psd ~/Movies/psd/
+		done
+		echo "card num:" $(ls ~/Movies/psd/ | wc -l)
+		;;
+	card_svn)
+		cp ~/Movies/psd/*psd ~/Pictures/project/svn_white/03Localization/KR/Card/PSD/
+		;;
 	card_mv)
 		ls ${pathCard} | grep -v 'tmp' | grep -v '_special' | grep -v '_'  > ${tmpFile}
 
