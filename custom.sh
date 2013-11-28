@@ -95,6 +95,11 @@ case ${command} in
 		;;
 	card_svn)
 		cp ~/Movies/psd/*psd ~/Pictures/project/svn_white/03Localization/KR/Card/PSD/
+		echo "svn card ok"
+		;;
+	card_scp)
+		check_host $2;
+		scp -i ~/kr_white.pem ~/Movies/jpg/*jpg mgsys@"${hostip}":~/sg-gcard-kr/html.kr/i/gcard/common/card/ 	
 		;;
 	card_mv)
 		ls ${pathCard} | grep -v 'tmp' | grep -v '_special' | grep -v '_'  > ${tmpFile}
