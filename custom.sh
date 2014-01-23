@@ -16,6 +16,9 @@ tmpFile=${pathCard}tmp
 function check_host()
 {
 	case $1 in
+		dev01)
+			hostip="54.249.126.209"
+			;;
 		dev02)
 			hostip="54.249.47.219"
 			;;
@@ -99,7 +102,10 @@ case ${command} in
 		;;
 	card_scp)
 		check_host $2;
-		scp -i ~/kr_white.pem ~/Movies/jpg/*jpg mgsys@"${hostip}":~/sg-gcard-kr/html.kr/i/gcard/common/card/ 	
+		scp -i ~/kr_white.pem ~/Movies/event_psd/$3/jpg/*jpg mgsys@"${hostip}":~/sg-gcard-kr/html.kr/i/gcard/common/card/ 	
+		;;
+	card_jpg)
+		cp ~/Movies/event_psd/$2/jpg/*jpg ~/sg-gcard-kr/html.kr/i/gcard/common/card/ 	
 		;;
 	card_mv)
 		ls ${pathCard} | grep -v 'tmp' | grep -v '_special' | grep -v '_'  > ${tmpFile}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <!-- CSS
+  ================================================== -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Favicons
+================================================== -->
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style type="text/css">
+    /*这里结合js中的d.clearRect(-150,-150,300,300);方法就必须加上和画布里转动的图片一样的背景图片，还要控制显示大小尺寸，本图片是长宽480px；如果没有js中的 方法就不需要此处的背景图片*/
+    #canvas_m{
+        /*因为图片是正方形的，所以可以缩放不变形 */
+        background: url(../img/images/dial2.jpg) no-repeat ;
+        -webkit-background-size: contain;/* for webKit*/
+        -moz-background-size: contain; /*Mozilla*/
+        -o-background-size: contain; /*opera*/
+        background-size:100%;/* generic*//*background-size:contain;  */
+    }
+
+</style>
+</head>
+<body >
+<!--画布标签-->
+<canvas id="canvas_m" height="300" width="300" style="border: 1px solid bisque;margin: 0; padding: 0;float: left;"></canvas>
+<script  type="text/javascript">
+<!--获取画布-->
+    var c=document.getElementById('canvas_m');
+<!--得到画布上下文-->
+    var d  = c.getContext('2d');
+    var imgsrc = "dial2.jpg";
+<!--创建标签元素-->
+    var img = document.createElement('img') ;
+    img.src = imgsrc;
+    img.height=300;
+    img.width=300;
+    img.onload= null;
+    img.onload = function () {
+        d.translate(150,150);    //设置原点
+        d.drawImage(img, -150,-150,300,300);  //left,top,width,height把img绘制到画布里
+    }     ;
+    var i = 0;
+    var v = 5;//转盘转动的速度，度数
+    var Stop = false;
+    var condition = Math.ceil(Math.random()*7)+1;//转盘有八个扇面，产生随机数1到8对应8个扇面
+
+    setTimeout(function(){
+        v = 10;
+    },1000);
+    setTimeout(function(){
+        v = 15;
+    },2500);
+    setTimeout(function(){
+        v = 25;
+    },3500);
+    setTimeout(function(){
+        v = 10;
+    },6500);
+    setTimeout(function(){
+        v = 5;
+        Stop = true;
+    },7500);
+
+    var timer1= setInterval(function(){
+        var d1 = c.getContext("2d");
+        d.clearRect(-150,-150,300,300);//清除画布缓存
+        d.rotate(v* Math.PI / 180);//画布一v度数转动
+        d.drawImage(img,-150, -150,300,300);//边转边把图片绘制到画布上
+        i = i + v;//记录转了的总度数
+        if(Stop){
+            var angle = i%360;
+            if(angle>=(9-condition)*45+20&&angle<=(10-condition)*45-20){
+                clearInterval(timer1);
+                alert('恭喜您中了'+condition+'号奖品!');
+            }
+        }
+    },100)
+</script>
+</body>
+</html>
