@@ -68,6 +68,7 @@ case ${command} in
 		cp ${pathBanner}/$2\_640.jpg ${pathBanner}/$3\_640.jpg
 		;;
 	scp_get)
+	#custom scp_get dev02 filename
 		check_host $2;
 		for i in "${arr[@]:2}"
 		do
@@ -75,6 +76,7 @@ case ${command} in
 		done
 		;;
 	scp_push)
+	#custom scp_push dev02 filename
 		check_host $2;
 		for i in "${arr[@]:2}"
 		do
@@ -108,6 +110,8 @@ case ${command} in
 		cp ~/Movies/event_psd/$2/jpg/*jpg ~/sg-gcard-kr/html.kr/i/gcard/common/card/ 	
 		;;
 	card_mv)
+	#custom card_mv 400
+	#custom card_mv 400 no
 		ls ${pathCard} | grep -v 'tmp' | grep -v '_special' | grep -v '_'  > ${tmpFile}
 
 		if [ ! -s ${tmpFile} ]; then 
